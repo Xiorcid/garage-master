@@ -1,0 +1,21 @@
+{
+    "cortex-debug.armToolchainPath": "c:\\Users\\kroko\\AppData\\Roaming\\Code\\User\\globalStorage\\bmd.stm32-for-vscode\\@xpack-dev-tools\\arm-none-eabi-gcc\\13.3.1-1.1.1\\.content\\bin",
+    "cortex-debug.openocdPath": "C:\\USERS\\KROKO\\APPDATA\\ROAMING\\CODE\\USER\\GLOBALSTORAGE\\BMD.STM32-FOR-VSCODE\\@XPACK-DEV-TOOLS\\OPENOCD\\0.12.0-4.1\\.CONTENT\\BIN\\OPENOCD.EXE",
+    "files.associations": {
+        "timers.h": "c",
+        "spim.h": "c",
+        "gpio.h": "c",
+        "gc9a01a.h": "c",
+        "f24f.h": "c",
+        "dispcolor.h": "c",
+        "clock.h": "c",
+        "wire.h": "c",
+        "constants.h": "c",
+        "random_move.h": "c",
+        "textfading.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "main.h": "c",
+        "buttons.h": "c",
+        "stm32_hal_legacy.h": "c"
+    }
+}

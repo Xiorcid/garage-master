@@ -1,0 +1,279 @@
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"enc.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/enc.c"
+  20              		.section	.text.initEnc,"ax",%progbits
+  21              		.align	1
+  22              		.global	initEnc
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	initEnc:
+  28              	.LVL0:
+  29              	.LFB134:
+   1:Core/Src/enc.c **** #include "enc.h"
+   2:Core/Src/enc.c **** 
+   3:Core/Src/enc.c **** void initEnc(Encoder *enc){
+  30              		.loc 1 3 27 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 3 27 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 14, -4
+  39 0002 0446     		mov	r4, r0
+   4:Core/Src/enc.c ****     enc->s1LastState = HAL_GPIO_ReadPin(enc->s1_port, enc->s1_pin);
+  40              		.loc 1 4 5 is_stmt 1 view .LVU2
+  41              		.loc 1 4 24 is_stmt 0 view .LVU3
+  42 0004 8188     		ldrh	r1, [r0, #4]
+  43 0006 0068     		ldr	r0, [r0]
+  44              	.LVL1:
+  45              		.loc 1 4 24 view .LVU4
+  46 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  47              	.LVL2:
+  48              		.loc 1 4 24 discriminator 1 view .LVU5
+  49 000c 0038     		subs	r0, r0, #0
+  50 000e 18BF     		it	ne
+  51 0010 0120     		movne	r0, #1
+  52              		.loc 1 4 22 discriminator 1 view .LVU6
+  53 0012 A073     		strb	r0, [r4, #14]
+   5:Core/Src/enc.c **** }
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s 			page 2
+
+
+  54              		.loc 1 5 1 view .LVU7
+  55 0014 10BD     		pop	{r4, pc}
+  56              		.loc 1 5 1 view .LVU8
+  57              		.cfi_endproc
+  58              	.LFE134:
+  60              		.section	.text.tickEnc,"ax",%progbits
+  61              		.align	1
+  62              		.global	tickEnc
+  63              		.syntax unified
+  64              		.thumb
+  65              		.thumb_func
+  67              	tickEnc:
+  68              	.LVL3:
+  69              	.LFB135:
+   6:Core/Src/enc.c **** 
+   7:Core/Src/enc.c **** 
+   8:Core/Src/enc.c **** void tickEnc(Encoder *enc){
+  70              		.loc 1 8 27 is_stmt 1 view -0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 0, uses_anonymous_args = 0
+  74              		.loc 1 8 27 is_stmt 0 view .LVU10
+  75 0000 38B5     		push	{r3, r4, r5, lr}
+  76              		.cfi_def_cfa_offset 16
+  77              		.cfi_offset 3, -16
+  78              		.cfi_offset 4, -12
+  79              		.cfi_offset 5, -8
+  80              		.cfi_offset 14, -4
+  81 0002 0446     		mov	r4, r0
+   9:Core/Src/enc.c ****     bool s1State = HAL_GPIO_ReadPin(enc->s1_port, enc->s1_pin);
+  82              		.loc 1 9 5 is_stmt 1 view .LVU11
+  83              		.loc 1 9 20 is_stmt 0 view .LVU12
+  84 0004 8188     		ldrh	r1, [r0, #4]
+  85 0006 0068     		ldr	r0, [r0]
+  86              	.LVL4:
+  87              		.loc 1 9 20 view .LVU13
+  88 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  89              	.LVL5:
+  90              		.loc 1 9 10 discriminator 1 view .LVU14
+  91 000c 051E     		subs	r5, r0, #0
+  92 000e 18BF     		it	ne
+  93 0010 0125     		movne	r5, #1
+  94              	.LVL6:
+  10:Core/Src/enc.c ****     if(s1State != enc -> s1LastState){
+  95              		.loc 1 10 5 is_stmt 1 view .LVU15
+  96              		.loc 1 10 23 is_stmt 0 view .LVU16
+  97 0012 A37B     		ldrb	r3, [r4, #14]	@ zero_extendqisi2
+  98              		.loc 1 10 7 view .LVU17
+  99 0014 AB42     		cmp	r3, r5
+ 100 0016 00D1     		bne	.L7
+ 101              	.L3:
+  11:Core/Src/enc.c ****         if(HAL_GPIO_ReadPin(enc->s2_port, enc->s2_pin) != s1State){
+  12:Core/Src/enc.c ****             enc->isLeftTurn = true;
+  13:Core/Src/enc.c ****         }else{
+  14:Core/Src/enc.c ****             enc->isRightTurn = true;
+  15:Core/Src/enc.c ****         }
+  16:Core/Src/enc.c ****     }
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s 			page 3
+
+
+  17:Core/Src/enc.c **** }
+ 102              		.loc 1 17 1 view .LVU18
+ 103 0018 38BD     		pop	{r3, r4, r5, pc}
+ 104              	.LVL7:
+ 105              	.L7:
+  11:Core/Src/enc.c ****         if(HAL_GPIO_ReadPin(enc->s2_port, enc->s2_pin) != s1State){
+ 106              		.loc 1 11 9 is_stmt 1 view .LVU19
+  11:Core/Src/enc.c ****         if(HAL_GPIO_ReadPin(enc->s2_port, enc->s2_pin) != s1State){
+ 107              		.loc 1 11 12 is_stmt 0 view .LVU20
+ 108 001a A189     		ldrh	r1, [r4, #12]
+ 109 001c A068     		ldr	r0, [r4, #8]
+ 110 001e FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 111              	.LVL8:
+  11:Core/Src/enc.c ****         if(HAL_GPIO_ReadPin(enc->s2_port, enc->s2_pin) != s1State){
+ 112              		.loc 1 11 11 discriminator 1 view .LVU21
+ 113 0022 A842     		cmp	r0, r5
+ 114 0024 02D0     		beq	.L5
+  12:Core/Src/enc.c ****         }else{
+ 115              		.loc 1 12 13 is_stmt 1 view .LVU22
+  12:Core/Src/enc.c ****         }else{
+ 116              		.loc 1 12 29 is_stmt 0 view .LVU23
+ 117 0026 0123     		movs	r3, #1
+ 118 0028 E373     		strb	r3, [r4, #15]
+ 119 002a F5E7     		b	.L3
+ 120              	.L5:
+  14:Core/Src/enc.c ****         }
+ 121              		.loc 1 14 13 is_stmt 1 view .LVU24
+  14:Core/Src/enc.c ****         }
+ 122              		.loc 1 14 30 is_stmt 0 view .LVU25
+ 123 002c 0123     		movs	r3, #1
+ 124 002e 2374     		strb	r3, [r4, #16]
+ 125              		.loc 1 17 1 view .LVU26
+ 126 0030 F2E7     		b	.L3
+ 127              		.cfi_endproc
+ 128              	.LFE135:
+ 130              		.section	.text.isLeft,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	isLeft
+ 133              		.syntax unified
+ 134              		.thumb
+ 135              		.thumb_func
+ 137              	isLeft:
+ 138              	.LVL9:
+ 139              	.LFB136:
+  18:Core/Src/enc.c **** 
+  19:Core/Src/enc.c **** bool isLeft(Encoder *enc){
+ 140              		.loc 1 19 26 is_stmt 1 view -0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		@ link register save eliminated.
+ 145              		.loc 1 19 26 is_stmt 0 view .LVU28
+ 146 0000 0346     		mov	r3, r0
+  20:Core/Src/enc.c ****     if(enc->isLeftTurn){
+ 147              		.loc 1 20 5 is_stmt 1 view .LVU29
+ 148              		.loc 1 20 11 is_stmt 0 view .LVU30
+ 149 0002 C07B     		ldrb	r0, [r0, #15]	@ zero_extendqisi2
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s 			page 4
+
+
+ 150              	.LVL10:
+ 151              		.loc 1 20 7 view .LVU31
+ 152 0004 00B9     		cbnz	r0, .L10
+ 153              	.L9:
+  21:Core/Src/enc.c ****         enc->isLeftTurn = false;
+  22:Core/Src/enc.c ****         return true;
+  23:Core/Src/enc.c ****     } return false;
+  24:Core/Src/enc.c **** }
+ 154              		.loc 1 24 1 view .LVU32
+ 155 0006 7047     		bx	lr
+ 156              	.L10:
+  21:Core/Src/enc.c ****         enc->isLeftTurn = false;
+ 157              		.loc 1 21 9 is_stmt 1 view .LVU33
+  21:Core/Src/enc.c ****         enc->isLeftTurn = false;
+ 158              		.loc 1 21 25 is_stmt 0 view .LVU34
+ 159 0008 0022     		movs	r2, #0
+ 160 000a DA73     		strb	r2, [r3, #15]
+  22:Core/Src/enc.c ****     } return false;
+ 161              		.loc 1 22 9 is_stmt 1 view .LVU35
+  22:Core/Src/enc.c ****     } return false;
+ 162              		.loc 1 22 16 is_stmt 0 view .LVU36
+ 163 000c FBE7     		b	.L9
+ 164              		.cfi_endproc
+ 165              	.LFE136:
+ 167              		.section	.text.isRight,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	isRight
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	isRight:
+ 175              	.LVL11:
+ 176              	.LFB137:
+  25:Core/Src/enc.c **** 
+  26:Core/Src/enc.c **** bool isRight(Encoder *enc){
+ 177              		.loc 1 26 27 is_stmt 1 view -0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181              		@ link register save eliminated.
+ 182              		.loc 1 26 27 is_stmt 0 view .LVU38
+ 183 0000 0346     		mov	r3, r0
+  27:Core/Src/enc.c ****     if(enc->isRightTurn){
+ 184              		.loc 1 27 5 is_stmt 1 view .LVU39
+ 185              		.loc 1 27 11 is_stmt 0 view .LVU40
+ 186 0002 007C     		ldrb	r0, [r0, #16]	@ zero_extendqisi2
+ 187              	.LVL12:
+ 188              		.loc 1 27 7 view .LVU41
+ 189 0004 00B9     		cbnz	r0, .L13
+ 190              	.L12:
+  28:Core/Src/enc.c ****         enc->isRightTurn = false;
+  29:Core/Src/enc.c ****         return true;
+  30:Core/Src/enc.c ****     } return false;
+  31:Core/Src/enc.c **** }...
+ 191              		.loc 1 31 1 view .LVU42
+ 192 0006 7047     		bx	lr
+ 193              	.L13:
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s 			page 5
+
+
+  28:Core/Src/enc.c ****         enc->isRightTurn = false;
+ 194              		.loc 1 28 9 is_stmt 1 view .LVU43
+  28:Core/Src/enc.c ****         enc->isRightTurn = false;
+ 195              		.loc 1 28 26 is_stmt 0 view .LVU44
+ 196 0008 0022     		movs	r2, #0
+ 197 000a 1A74     		strb	r2, [r3, #16]
+  29:Core/Src/enc.c ****         return true;
+ 198              		.loc 1 29 9 is_stmt 1 view .LVU45
+  29:Core/Src/enc.c ****         return true;
+ 199              		.loc 1 29 16 is_stmt 0 view .LVU46
+ 200 000c FBE7     		b	.L12
+ 201              		.cfi_endproc
+ 202              	.LFE137:
+ 204              		.text
+ 205              	.Letext0:
+ 206              		.file 2 "C:/Users/kroko/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+ 207              		.file 3 "C:/Users/kroko/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-to
+ 208              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f413xx.h"
+ 209              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 210              		.file 6 "Core/Inc/enc.h"
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 enc.c
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:21     .text.initEnc:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:27     .text.initEnc:00000000 initEnc
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:61     .text.tickEnc:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:67     .text.tickEnc:00000000 tickEnc
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:131    .text.isLeft:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:137    .text.isLeft:00000000 isLeft
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:168    .text.isRight:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccvGM4Es.s:174    .text.isRight:00000000 isRight
+
+UNDEFINED SYMBOLS
+HAL_GPIO_ReadPin
