@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
   29:Core/Src/main.c **** #include "enc.h"
   30:Core/Src/main.c **** /* USER CODE END Includes */
   31:Core/Src/main.c **** 
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 2
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 2
 
 
   32:Core/Src/main.c **** /* Private typedef -----------------------------------------------------------*/
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
   86:Core/Src/main.c **** /* USER CODE END PFP */
   87:Core/Src/main.c **** 
   88:Core/Src/main.c **** /* Private user code ---------------------------------------------------------*/
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 3
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 3
 
 
   89:Core/Src/main.c **** /* USER CODE BEGIN 0 */
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  143:Core/Src/main.c ****   /* USER CODE END SysInit */
  144:Core/Src/main.c **** 
  145:Core/Src/main.c ****   /* Initialize all configured peripherals */
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 4
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 4
 
 
  146:Core/Src/main.c ****   MX_GPIO_Init();
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  200:Core/Src/main.c **** 
  201:Core/Src/main.c ****       case 3:
  202:Core/Src/main.c ****         break;
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 5
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 5
 
 
  203:Core/Src/main.c ****         
@@ -272,11 +272,11 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  231:Core/Src/main.c ****       break;
  232:Core/Src/main.c **** 
  233:Core/Src/main.c ****     case STATE_DISP_1:
- 234:Core/Src/main.c ****       Dispaly_Data(25.8, 28.5, 1, 0, 400, '%', TEMP_PALETTE, device_type, MODE_NORMAL);
+ 234:Core/Src/main.c ****       Dispaly_Data(25.8, 28.5, 1, 0, 400, '*', TEMP_PALETTE, device_type, MODE_NORMAL);
  235:Core/Src/main.c ****       break;
  236:Core/Src/main.c **** 
  237:Core/Src/main.c ****     case STATE_DISP_4:
- 238:Core/Src/main.c ****       Dispaly_Data(25.8, testVal, 0, 0, 400, '%', TEMP_PALETTE, TYPE_SET_TEL, testMode);
+ 238:Core/Src/main.c ****       Dispaly_Data(25.8, testVal, 0, 0, 400, '9', TEMP_PALETTE, TYPE_SET_TEL, testMode);
  239:Core/Src/main.c ****       break;
  240:Core/Src/main.c **** 
  241:Core/Src/main.c ****     case STATE_EDIT:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  257:Core/Src/main.c ****     if (HAL_GetTick()-screen_disp_time>5000 && screen_scroll_mode == SCROLL_MODE_AUTO){
  258:Core/Src/main.c ****       if(state != STATE_INIT){
  259:Core/Src/main.c ****         do{
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 6
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 6
 
 
  260:Core/Src/main.c ****           if(state < DEV_COUNT){
@@ -313,35 +313,35 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  269:Core/Src/main.c **** 
  270:Core/Src/main.c ****     tick(&button);
  271:Core/Src/main.c ****     tickEnc(&enc);
- 272:Core/Src/main.c ****     //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, isHold(&button));
- 273:Core/Src/main.c **** 
- 274:Core/Src/main.c ****     if(isClicked(&button)){
- 275:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
- 276:Core/Src/main.c ****       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
- 277:Core/Src/main.c ****       if(screen_scroll_mode == 0){
- 278:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
- 279:Core/Src/main.c ****       }else{
- 280:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_AUTO;
- 281:Core/Src/main.c ****       }
- 282:Core/Src/main.c ****     }
- 283:Core/Src/main.c **** 
- 284:Core/Src/main.c ****     if(isRight(&enc)){
- 285:Core/Src/main.c ****       if(state < DEV_COUNT){
- 286:Core/Src/main.c ****         state++;
- 287:Core/Src/main.c ****       }else{
- 288:Core/Src/main.c ****         state = STATE_DISP_0;
- 289:Core/Src/main.c ****       }
- 290:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
- 291:Core/Src/main.c ****     }
- 292:Core/Src/main.c **** 
- 293:Core/Src/main.c ****     if(isLeft(&enc)){
- 294:Core/Src/main.c ****       if(state > STATE_INIT){
- 295:Core/Src/main.c ****         state--;
- 296:Core/Src/main.c ****       }else{
- 297:Core/Src/main.c ****         state = DEV_COUNT-1;
- 298:Core/Src/main.c ****       }
- 299:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
- 300:Core/Src/main.c ****     }
+ 272:Core/Src/main.c **** 
+ 273:Core/Src/main.c ****     if(isClicked(&button)){
+ 274:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
+ 275:Core/Src/main.c ****       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+ 276:Core/Src/main.c ****       if(screen_scroll_mode == 0){
+ 277:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
+ 278:Core/Src/main.c ****       }else{
+ 279:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_AUTO;
+ 280:Core/Src/main.c ****       }
+ 281:Core/Src/main.c ****     }
+ 282:Core/Src/main.c **** 
+ 283:Core/Src/main.c ****     if(isRight(&enc)){
+ 284:Core/Src/main.c ****       if(state < DEV_COUNT){
+ 285:Core/Src/main.c ****         state++;
+ 286:Core/Src/main.c ****       }else{
+ 287:Core/Src/main.c ****         state = STATE_DISP_0;
+ 288:Core/Src/main.c ****       }
+ 289:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
+ 290:Core/Src/main.c ****     }
+ 291:Core/Src/main.c **** 
+ 292:Core/Src/main.c ****     if(isLeft(&enc)){
+ 293:Core/Src/main.c ****       if(state > STATE_INIT+1){
+ 294:Core/Src/main.c ****         state--;
+ 295:Core/Src/main.c ****       }else{
+ 296:Core/Src/main.c ****         state = DEV_COUNT;
+ 297:Core/Src/main.c ****       }
+ 298:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
+ 299:Core/Src/main.c ****     }
+ 300:Core/Src/main.c ****     // HELLO, GIT!
  301:Core/Src/main.c **** 
  302:Core/Src/main.c ****     if(isHold(&button) && HAL_GetTick() - hold_timeout > 750){
  303:Core/Src/main.c ****       // screen_disp_time = HAL_GetTick();
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  314:Core/Src/main.c ****     }
  315:Core/Src/main.c ****     /* USER CODE END WHILE */
  316:Core/Src/main.c **** 
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 7
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 7
 
 
  317:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  371:Core/Src/main.c ****   * @retval None
  372:Core/Src/main.c ****   */
  373:Core/Src/main.c **** static void MX_SPI1_Init(void)
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 8
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 8
 
 
  374:Core/Src/main.c **** {
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  428:Core/Src/main.c ****   huart5.Init.OverSampling = UART_OVERSAMPLING_16;
  429:Core/Src/main.c ****   if (HAL_UART_Init(&huart5) != HAL_OK)
  430:Core/Src/main.c ****   {
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 9
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 9
 
 
  431:Core/Src/main.c ****     Error_Handler();
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  485:Core/Src/main.c **** 
  486:Core/Src/main.c ****   /* USER CODE END USB_OTG_FS_Init 1 */
  487:Core/Src/main.c ****   hpcd_USB_OTG_FS.Instance = USB_OTG_FS;
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 10
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 10
 
 
  488:Core/Src/main.c ****   hpcd_USB_OTG_FS.Init.dev_endpoints = 6;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 48
   31              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 11
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 11
 
 
   32 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
   79 0038 0192     		str	r2, [sp, #4]
   80              		.loc 1 547 3 view .LVU13
   81 003a 019A     		ldr	r2, [sp, #4]
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 12
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 12
 
 
   82              	.LBE3:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  132              		.loc 1 551 3 view .LVU33
  133              	.LBB7:
  134              		.loc 1 551 3 view .LVU34
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 13
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 13
 
 
  135 0078 0594     		str	r4, [sp, #20]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  179 00be 294E     		ldr	r6, .L3+4
  180 00c0 2246     		mov	r2, r4
  181 00c2 4021     		movs	r1, #64
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 14
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 14
 
 
  182 00c4 3046     		mov	r0, r6
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  577:Core/Src/main.c ****   GPIO_InitStruct.Pin = LD1_Pin|LD3_Pin|LD2_Pin;
  221              		.loc 1 577 3 view .LVU64
  222              		.loc 1 577 23 is_stmt 0 view .LVU65
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 15
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 15
 
 
  223 00f6 44F28103 		movw	r3, #16513
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  592:Core/Src/main.c ****   GPIO_InitStruct.Pin = USB_PowerSwitchOn_Pin;
  263              		.loc 1 592 3 view .LVU84
  264              		.loc 1 592 23 is_stmt 0 view .LVU85
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 16
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 16
 
 
  265 0128 4023     		movs	r3, #64
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  304 014e 0994     		str	r4, [sp, #36]
  608:Core/Src/main.c ****   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
  305              		.loc 1 608 3 is_stmt 1 view .LVU106
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 17
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 17
 
 
  306 0150 07A9     		add	r1, sp, #28
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  515:Core/Src/main.c ****   __HAL_RCC_DMA1_CLK_ENABLE();
  354              		.loc 1 515 3 view .LVU112
  355 0012 1A6B     		ldr	r2, [r3, #48]
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 18
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 18
 
 
  356 0014 02F48002 		and	r2, r2, #4194304
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  526:Core/Src/main.c ****   HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
  398              		.loc 1 526 3 view .LVU125
  399 0050 2246     		mov	r2, r4
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 19
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 19
 
 
  400 0052 2146     		mov	r1, r4
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  449 0004 0C4B     		ldr	r3, .L11+4
  450 0006 0360     		str	r3, [r0]
  385:Core/Src/main.c ****   hspi1.Init.Direction = SPI_DIRECTION_1LINE;
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 20
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 20
 
 
  451              		.loc 1 385 3 is_stmt 1 view .LVU133
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  485              		.loc 1 395 3 is_stmt 1 view .LVU153
  395:Core/Src/main.c ****   if (HAL_SPI_Init(&hspi1) != HAL_OK)
  486              		.loc 1 395 28 is_stmt 0 view .LVU154
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 21
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 21
 
 
  487 002a 0A23     		movs	r3, #10
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  532 0010 C271     		strb	r2, [r0, #7]
  490:Core/Src/main.c ****   hpcd_USB_OTG_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
  533              		.loc 1 490 3 is_stmt 1 view .LVU166
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 22
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 22
 
 
  490:Core/Src/main.c ****   hpcd_USB_OTG_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  569 002c 00000000 		.word	hpcd_USB_OTG_FS
  570              		.cfi_endproc
  571              	.LFE139:
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 23
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 23
 
 
  573              		.section	.text.MX_UART5_Init,"ax",%progbits
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  613              		.loc 1 427 25 is_stmt 0 view .LVU200
  614 001a 8361     		str	r3, [r0, #24]
  428:Core/Src/main.c ****   if (HAL_UART_Init(&huart5) != HAL_OK)
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 24
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 24
 
 
  615              		.loc 1 428 3 is_stmt 1 view .LVU201
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  659              		.loc 1 456 26 is_stmt 0 view .LVU213
  660 000e 0023     		movs	r3, #0
  661 0010 8360     		str	r3, [r0, #8]
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 25
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 25
 
 
  457:Core/Src/main.c ****   huart8.Init.Parity = UART_PARITY_NONE;
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  703              		.cfi_startproc
  704              		@ args = 0, pretend = 0, frame = 80
  705              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 26
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 26
 
 
  706 0000 30B5     		push	{r4, r5, lr}
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  748 0030 0194     		str	r4, [sp, #4]
  334:Core/Src/main.c **** 
  749              		.loc 1 334 3 view .LVU241
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 27
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 27
 
 
  750 0032 184B     		ldr	r3, .L27+4
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  787              		.loc 1 345 30 is_stmt 0 view .LVU258
  788 0064 0422     		movs	r2, #4
  789 0066 1192     		str	r2, [sp, #68]
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 28
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 28
 
 
  346:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLR = 2;
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  364:Core/Src/main.c ****   }
  825              		.loc 1 364 5 is_stmt 1 view .LVU278
  366:Core/Src/main.c **** 
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 29
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 29
 
 
  826              		.loc 1 366 1 is_stmt 0 view .LVU279
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  879              	.LVL26:
  127:Core/Src/main.c ****   gpio_SetGPIOmode_Out(GPIOB, GPIO_PIN_0);
  880              		.loc 1 127 3 view .LVU283
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 30
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 30
 
 
  881 0016 8021     		movs	r1, #128
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  925              	.LVL37:
  149:Core/Src/main.c ****   MX_UART5_Init();
  926              		.loc 1 149 3 view .LVU294
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 31
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 31
 
 
  927 0060 FFF7FEFF 		bl	MX_USB_OTG_FS_PCD_Init
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  970              		.loc 1 163 3 is_stmt 1 view .LVU305
  163:Core/Src/main.c ****   uint32_t hold_timeout = HAL_GetTick();
  971              		.loc 1 163 31 is_stmt 0 view .LVU306
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 32
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 32
 
 
  972 00a0 FFF7FEFF 		bl	HAL_GetTick
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1009 00c0 14D1     		bne	.L61
  1010              	.L38:
  188:Core/Src/main.c ****       {
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 33
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 33
 
 
  1011              		.loc 1 188 7 is_stmt 1 view .LVU324
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1056 00fe 8749     		ldr	r1, .L65+60
  1057 0100 8748     		ldr	r0, .L65+64
  1058 0102 FFF7FEFF 		bl	SIM_Init
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 34
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 34
 
 
  1059              	.LVL60:
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  222:Core/Src/main.c ****         break;
  1099              		.loc 1 222 9 is_stmt 1 view .LVU348
  222:Core/Src/main.c ****         break;
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 35
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 35
 
 
  1100              		.loc 1 222 26 is_stmt 0 view .LVU349
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1143 0176 6C4B     		ldr	r3, .L65+72
  1144 0178 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  247:Core/Src/main.c ****       if(dev_num == old_dev_num && dev_num != 5){
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 36
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 36
 
 
  1145              		.loc 1 247 43 discriminator 1 view .LVU361
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1185 01a6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  257:Core/Src/main.c ****       if(state != STATE_INIT){
  1186              		.loc 1 257 45 discriminator 1 view .LVU376
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 37
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 37
 
 
  1187 01a8 3BB9     		cbnz	r3, .L45
@@ -2188,97 +2188,97 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1205 01be 5046     		mov	r0, r10
  1206 01c0 FFF7FEFF 		bl	tick
  1207              	.LVL78:
- 271:Core/Src/main.c ****     //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, isHold(&button));
+ 271:Core/Src/main.c **** 
  1208              		.loc 1 271 5 view .LVU383
  1209 01c4 5248     		ldr	r0, .L65+48
  1210 01c6 FFF7FEFF 		bl	tickEnc
  1211              	.LVL79:
- 274:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
- 1212              		.loc 1 274 5 view .LVU384
- 274:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
- 1213              		.loc 1 274 8 is_stmt 0 view .LVU385
+ 273:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
+ 1212              		.loc 1 273 5 view .LVU384
+ 273:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
+ 1213              		.loc 1 273 8 is_stmt 0 view .LVU385
  1214 01ca 5046     		mov	r0, r10
  1215 01cc FFF7FEFF 		bl	isClicked
  1216              	.LVL80:
- 274:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
- 1217              		.loc 1 274 7 discriminator 1 view .LVU386
+ 273:Core/Src/main.c ****       screen_disp_time = HAL_GetTick();
+ 1217              		.loc 1 273 7 discriminator 1 view .LVU386
  1218 01d0 0028     		cmp	r0, #0
  1219 01d2 40F0CA80 		bne	.L63
  1220              	.L50:
- 284:Core/Src/main.c ****       if(state < DEV_COUNT){
- 1221              		.loc 1 284 5 is_stmt 1 view .LVU387
- 284:Core/Src/main.c ****       if(state < DEV_COUNT){
- 1222              		.loc 1 284 8 is_stmt 0 view .LVU388
+ 283:Core/Src/main.c ****       if(state < DEV_COUNT){
+ 1221              		.loc 1 283 5 is_stmt 1 view .LVU387
+ 283:Core/Src/main.c ****       if(state < DEV_COUNT){
+ 1222              		.loc 1 283 8 is_stmt 0 view .LVU388
  1223 01d6 4E48     		ldr	r0, .L65+48
  1224 01d8 FFF7FEFF 		bl	isRight
  1225              	.LVL81:
- 284:Core/Src/main.c ****       if(state < DEV_COUNT){
- 1226              		.loc 1 284 7 discriminator 1 view .LVU389
+ 283:Core/Src/main.c ****       if(state < DEV_COUNT){
+ 1226              		.loc 1 283 7 discriminator 1 view .LVU389
  1227 01dc 50B1     		cbz	r0, .L52
- 285:Core/Src/main.c ****         state++;
- 1228              		.loc 1 285 7 is_stmt 1 view .LVU390
- 285:Core/Src/main.c ****         state++;
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 38
+ 284:Core/Src/main.c ****         state++;
+ 1228              		.loc 1 284 7 is_stmt 1 view .LVU390
+ 284:Core/Src/main.c ****         state++;
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 38
 
 
- 1229              		.loc 1 285 16 is_stmt 0 view .LVU391
+ 1229              		.loc 1 284 16 is_stmt 0 view .LVU391
  1230 01de 524B     		ldr	r3, .L65+72
  1231 01e0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 285:Core/Src/main.c ****         state++;
- 1232              		.loc 1 285 9 view .LVU392
+ 284:Core/Src/main.c ****         state++;
+ 1232              		.loc 1 284 9 view .LVU392
  1233 01e2 042B     		cmp	r3, #4
  1234 01e4 00F2D380 		bhi	.L53
- 286:Core/Src/main.c ****       }else{
- 1235              		.loc 1 286 9 is_stmt 1 view .LVU393
- 286:Core/Src/main.c ****       }else{
- 1236              		.loc 1 286 14 is_stmt 0 view .LVU394
+ 285:Core/Src/main.c ****       }else{
+ 1235              		.loc 1 285 9 is_stmt 1 view .LVU393
+ 285:Core/Src/main.c ****       }else{
+ 1236              		.loc 1 285 14 is_stmt 0 view .LVU394
  1237 01e8 0133     		adds	r3, r3, #1
  1238 01ea 4F4A     		ldr	r2, .L65+72
  1239 01ec 1370     		strb	r3, [r2]
  1240              	.L54:
- 290:Core/Src/main.c ****     }
- 1241              		.loc 1 290 7 is_stmt 1 view .LVU395
- 290:Core/Src/main.c ****     }
- 1242              		.loc 1 290 26 is_stmt 0 view .LVU396
+ 289:Core/Src/main.c ****     }
+ 1241              		.loc 1 289 7 is_stmt 1 view .LVU395
+ 289:Core/Src/main.c ****     }
+ 1242              		.loc 1 289 26 is_stmt 0 view .LVU396
  1243 01ee FFF7FEFF 		bl	HAL_GetTick
  1244              	.LVL82:
  1245 01f2 0446     		mov	r4, r0
  1246              	.LVL83:
  1247              	.L52:
- 293:Core/Src/main.c ****       if(state > STATE_INIT){
- 1248              		.loc 1 293 5 is_stmt 1 view .LVU397
- 293:Core/Src/main.c ****       if(state > STATE_INIT){
- 1249              		.loc 1 293 8 is_stmt 0 view .LVU398
+ 292:Core/Src/main.c ****       if(state > STATE_INIT+1){
+ 1248              		.loc 1 292 5 is_stmt 1 view .LVU397
+ 292:Core/Src/main.c ****       if(state > STATE_INIT+1){
+ 1249              		.loc 1 292 8 is_stmt 0 view .LVU398
  1250 01f4 4648     		ldr	r0, .L65+48
  1251 01f6 FFF7FEFF 		bl	isLeft
  1252              	.LVL84:
- 293:Core/Src/main.c ****       if(state > STATE_INIT){
- 1253              		.loc 1 293 7 discriminator 1 view .LVU399
+ 292:Core/Src/main.c ****       if(state > STATE_INIT+1){
+ 1253              		.loc 1 292 7 discriminator 1 view .LVU399
  1254 01fa 50B1     		cbz	r0, .L55
- 294:Core/Src/main.c ****         state--;
- 1255              		.loc 1 294 7 is_stmt 1 view .LVU400
- 294:Core/Src/main.c ****         state--;
- 1256              		.loc 1 294 16 is_stmt 0 view .LVU401
+ 293:Core/Src/main.c ****         state--;
+ 1255              		.loc 1 293 7 is_stmt 1 view .LVU400
+ 293:Core/Src/main.c ****         state--;
+ 1256              		.loc 1 293 16 is_stmt 0 view .LVU401
  1257 01fc 4A4B     		ldr	r3, .L65+72
  1258 01fe 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 294:Core/Src/main.c ****         state--;
- 1259              		.loc 1 294 9 view .LVU402
- 1260 0200 002B     		cmp	r3, #0
- 1261 0202 00F0C880 		beq	.L56
- 295:Core/Src/main.c ****       }else{
- 1262              		.loc 1 295 9 is_stmt 1 view .LVU403
- 295:Core/Src/main.c ****       }else{
- 1263              		.loc 1 295 14 is_stmt 0 view .LVU404
+ 293:Core/Src/main.c ****         state--;
+ 1259              		.loc 1 293 9 view .LVU402
+ 1260 0200 012B     		cmp	r3, #1
+ 1261 0202 40F2C880 		bls	.L56
+ 294:Core/Src/main.c ****       }else{
+ 1262              		.loc 1 294 9 is_stmt 1 view .LVU403
+ 294:Core/Src/main.c ****       }else{
+ 1263              		.loc 1 294 14 is_stmt 0 view .LVU404
  1264 0206 013B     		subs	r3, r3, #1
  1265 0208 474A     		ldr	r2, .L65+72
  1266 020a 1370     		strb	r3, [r2]
  1267              	.L57:
- 299:Core/Src/main.c ****     }
- 1268              		.loc 1 299 7 is_stmt 1 view .LVU405
- 299:Core/Src/main.c ****     }
- 1269              		.loc 1 299 26 is_stmt 0 view .LVU406
+ 298:Core/Src/main.c ****     }
+ 1268              		.loc 1 298 7 is_stmt 1 view .LVU405
+ 298:Core/Src/main.c ****     }
+ 1269              		.loc 1 298 26 is_stmt 0 view .LVU406
  1270 020c FFF7FEFF 		bl	HAL_GetTick
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 39
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 39
 
 
  1271              	.LVL85:
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1312 0240 01A2     		adr	r2, .L33
  1313 0242 52F823F0 		ldr	pc, [r2, r3, lsl #2]
  1314 0246 00BF     		.p2align 2
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 40
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 40
 
 
  1315              	.L33:
@@ -2357,7 +2357,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1327 0266 0092     		str	r2, [sp]
  1328 0268 314B     		ldr	r3, .L65+80
  1329 026a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1330 026c 2521     		movs	r1, #37
+ 1330 026c 2A21     		movs	r1, #42
  1331 026e 9FED1C3B 		vldr.64	d3, .L65
  1332 0272 9FED1D2B 		vldr.64	d2, .L65+8
  1333 0276 0120     		movs	r0, #1
@@ -2374,7 +2374,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1342 0286 CDF80080 		str	r8, [sp]
  1343 028a 0023     		movs	r3, #0
  1344 028c 1A46     		mov	r2, r3
- 1345 028e 2521     		movs	r1, #37
+ 1345 028e 3921     		movs	r1, #57
  1346 0290 9FED133B 		vldr.64	d3, .L65
  1347 0294 9FED142B 		vldr.64	d2, .L65+8
  1348 0298 1846     		mov	r0, r3
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1364 02ba 9FED0D1B 		vldr.64	d1, .L65+16
  1365 02be 9FED0E0B 		vldr.64	d0, .L65+24
  1366 02c2 FFF7FEFF 		bl	Dispaly_Data
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 41
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 41
 
 
  1367              	.LVL94:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1414              	.L48:
  265:Core/Src/main.c ****       }
  1415              		.loc 1 265 17 is_stmt 1 view .LVU431
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 42
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 42
 
 
  265:Core/Src/main.c ****       }
@@ -2496,68 +2496,68 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1439 0366 1370     		strb	r3, [r2]
  1440 0368 EFE7     		b	.L48
  1441              	.L63:
- 275:Core/Src/main.c ****       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
- 1442              		.loc 1 275 7 is_stmt 1 view .LVU441
- 275:Core/Src/main.c ****       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
- 1443              		.loc 1 275 26 is_stmt 0 view .LVU442
+ 274:Core/Src/main.c ****       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+ 1442              		.loc 1 274 7 is_stmt 1 view .LVU441
+ 274:Core/Src/main.c ****       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+ 1443              		.loc 1 274 26 is_stmt 0 view .LVU442
  1444 036a FFF7FEFF 		bl	HAL_GetTick
  1445              	.LVL95:
  1446 036e 0446     		mov	r4, r0
  1447              	.LVL96:
- 276:Core/Src/main.c ****       if(screen_scroll_mode == 0){
- 1448              		.loc 1 276 7 is_stmt 1 view .LVU443
+ 275:Core/Src/main.c ****       if(screen_scroll_mode == 0){
+ 1448              		.loc 1 275 7 is_stmt 1 view .LVU443
  1449 0370 8021     		movs	r1, #128
  1450 0372 0E48     		ldr	r0, .L67+8
  1451              	.LVL97:
- 276:Core/Src/main.c ****       if(screen_scroll_mode == 0){
- 1452              		.loc 1 276 7 is_stmt 0 view .LVU444
+ 275:Core/Src/main.c ****       if(screen_scroll_mode == 0){
+ 1452              		.loc 1 275 7 is_stmt 0 view .LVU444
  1453 0374 FFF7FEFF 		bl	HAL_GPIO_TogglePin
  1454              	.LVL98:
- 277:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
- 1455              		.loc 1 277 7 is_stmt 1 view .LVU445
- 277:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
- 1456              		.loc 1 277 29 is_stmt 0 view .LVU446
+ 276:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
+ 1455              		.loc 1 276 7 is_stmt 1 view .LVU445
+ 276:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
+ 1456              		.loc 1 276 29 is_stmt 0 view .LVU446
  1457 0378 0D4B     		ldr	r3, .L67+12
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 43
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 43
 
 
  1458 037a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 277:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
- 1459              		.loc 1 277 9 view .LVU447
+ 276:Core/Src/main.c ****         screen_scroll_mode = SCROLL_MODE_HALT;
+ 1459              		.loc 1 276 9 view .LVU447
  1460 037c 1BB9     		cbnz	r3, .L51
- 278:Core/Src/main.c ****       }else{
- 1461              		.loc 1 278 9 is_stmt 1 view .LVU448
- 278:Core/Src/main.c ****       }else{
- 1462              		.loc 1 278 28 is_stmt 0 view .LVU449
+ 277:Core/Src/main.c ****       }else{
+ 1461              		.loc 1 277 9 is_stmt 1 view .LVU448
+ 277:Core/Src/main.c ****       }else{
+ 1462              		.loc 1 277 28 is_stmt 0 view .LVU449
  1463 037e 0C4B     		ldr	r3, .L67+12
  1464 0380 0122     		movs	r2, #1
  1465 0382 1A70     		strb	r2, [r3]
  1466 0384 27E7     		b	.L50
  1467              	.L51:
- 280:Core/Src/main.c ****       }
- 1468              		.loc 1 280 9 is_stmt 1 view .LVU450
- 280:Core/Src/main.c ****       }
- 1469              		.loc 1 280 28 is_stmt 0 view .LVU451
+ 279:Core/Src/main.c ****       }
+ 1468              		.loc 1 279 9 is_stmt 1 view .LVU450
+ 279:Core/Src/main.c ****       }
+ 1469              		.loc 1 279 28 is_stmt 0 view .LVU451
  1470 0386 0A4B     		ldr	r3, .L67+12
  1471 0388 0022     		movs	r2, #0
  1472 038a 1A70     		strb	r2, [r3]
  1473 038c 23E7     		b	.L50
  1474              	.L53:
- 288:Core/Src/main.c ****       }
- 1475              		.loc 1 288 9 is_stmt 1 view .LVU452
- 288:Core/Src/main.c ****       }
- 1476              		.loc 1 288 15 is_stmt 0 view .LVU453
+ 287:Core/Src/main.c ****       }
+ 1475              		.loc 1 287 9 is_stmt 1 view .LVU452
+ 287:Core/Src/main.c ****       }
+ 1476              		.loc 1 287 15 is_stmt 0 view .LVU453
  1477 038e 054B     		ldr	r3, .L67
  1478 0390 0122     		movs	r2, #1
  1479 0392 1A70     		strb	r2, [r3]
  1480 0394 2BE7     		b	.L54
  1481              	.L56:
- 297:Core/Src/main.c ****       }
- 1482              		.loc 1 297 9 is_stmt 1 view .LVU454
- 297:Core/Src/main.c ****       }
- 1483              		.loc 1 297 15 is_stmt 0 view .LVU455
+ 296:Core/Src/main.c ****       }
+ 1482              		.loc 1 296 9 is_stmt 1 view .LVU454
+ 296:Core/Src/main.c ****       }
+ 1483              		.loc 1 296 15 is_stmt 0 view .LVU455
  1484 0396 034B     		ldr	r3, .L67
- 1485 0398 0422     		movs	r2, #4
+ 1485 0398 0522     		movs	r2, #5
  1486 039a 1A70     		strb	r2, [r3]
  1487 039c 36E7     		b	.L57
  1488              	.LVL99:
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1501 03b0 00000000 		.word	screen_scroll_mode
  1502              		.cfi_endproc
  1503              	.LFE134:
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 44
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 44
 
 
  1505              		.section	.rodata.HAL_UART_RxCpltCallback.str1.4,"aMS",%progbits,1
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1543              		.loc 1 629 5 is_stmt 0 view .LVU463
  1544 0014 FFF7FEFF 		bl	HAL_UART_Receive_DMA
  1545              	.LVL103:
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 45
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 45
 
 
  630:Core/Src/main.c ****     SIM_Init("AT", "OK");
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  644:Core/Src/main.c ****     val = atof(rx_buff);
  645:Core/Src/main.c ****     val /= 10;
  646:Core/Src/main.c ****   }
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 46
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 46
 
 
  647:Core/Src/main.c **** }
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1628 0078 51EC100B 		vmov	r0, r1, d0
  644:Core/Src/main.c ****     val /= 10;
  1629              		.loc 1 644 9 discriminator 1 view .LVU490
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 47
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 47
 
 
  1630 007c 0F4C     		ldr	r4, .L76+44
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  658:Core/Src/main.c **** 
  659:Core/Src/main.c ****   /* USER CODE END Error_Handler_Debug */
  660:Core/Src/main.c **** }
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 48
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 48
 
 
  1674              		.loc 1 660 1 view .LVU495
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1740              		.align	2
  1743              	tx_buff:
  1744 0000 54424344 		.ascii	"TBCDEFGHIJ"
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 49
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 49
 
 
  1744      45464748 
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1789              		.section	.bss.huart5,"aw",%nobits
  1790              		.align	2
  1793              	huart5:
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 50
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 50
 
 
  1794 0000 00000000 		.space	72
@@ -2979,83 +2979,83 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 1
  1823              		.file 21 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  1824              		.file 22 "Core/Inc/gpio.h"
  1825              		.file 23 "<built-in>"
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 51
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 51
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:21     .text.MX_GPIO_Init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:26     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:318    .text.MX_GPIO_Init:00000160 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:327    .text.MX_DMA_Init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:332    .text.MX_DMA_Init:00000000 MX_DMA_Init
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:426    .text.MX_DMA_Init:00000074 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:431    .text.MX_SPI1_Init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:436    .text.MX_SPI1_Init:00000000 MX_SPI1_Init
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:499    .text.MX_SPI1_Init:00000034 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1800   .bss.hspi1:00000000 hspi1
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:505    .text.MX_USB_OTG_FS_PCD_Init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:510    .text.MX_USB_OTG_FS_PCD_Init:00000000 MX_USB_OTG_FS_PCD_Init
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:569    .text.MX_USB_OTG_FS_PCD_Init:0000002c $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1758   .bss.hpcd_USB_OTG_FS:00000000 hpcd_USB_OTG_FS
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:574    .text.MX_UART5_Init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:579    .text.MX_UART5_Init:00000000 MX_UART5_Init
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:628    .text.MX_UART5_Init:00000024 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1793   .bss.huart5:00000000 huart5
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:634    .text.MX_UART8_Init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:639    .text.MX_UART8_Init:00000000 MX_UART8_Init
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:688    .text.MX_UART8_Init:00000024 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1786   .bss.huart8:00000000 huart8
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:694    .text.SystemClock_Config:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:700    .text.SystemClock_Config:00000000 SystemClock_Config
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:834    .text.SystemClock_Config:00000090 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:840    .rodata.main.str1.4:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:847    .text.main:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:853    .text.main:00000000 main
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1316   .text.main:00000248 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1323   .text.main:00000264 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1383   .text.main:000002e0 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1696   .data.button:00000000 button
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1684   .data.enc:00000000 enc
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1718   .bss.dev_num:00000000 dev_num
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1743   .data.tx_buff:00000000 tx_buff
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1724   .bss.state:00000000 state
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1712   .bss.dev_state_lst:00000000 dev_state_lst
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1730   .bss.device_type:00000000 device_type
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1736   .bss.palette:00000000 palette
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1705   .bss.screen_scroll_mode:00000000 screen_scroll_mode
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1750   .data.val:00000000 val
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1411   .text.main:00000344 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1498   .text.main:000003a4 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1506   .rodata.HAL_UART_RxCpltCallback.str1.4:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1511   .text.HAL_UART_RxCpltCallback:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1517   .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1644   .text.HAL_UART_RxCpltCallback:00000090 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1661   .text.Error_Handler:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1667   .text.Error_Handler:00000000 Error_Handler
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1681   .data.enc:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1693   .data.button:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1706   .bss.screen_scroll_mode:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1709   .bss.dev_state_lst:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1719   .bss.dev_num:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1725   .bss.state:00000000 $d
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s 			page 52
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:21     .text.MX_GPIO_Init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:26     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:318    .text.MX_GPIO_Init:00000160 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:327    .text.MX_DMA_Init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:332    .text.MX_DMA_Init:00000000 MX_DMA_Init
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:426    .text.MX_DMA_Init:00000074 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:431    .text.MX_SPI1_Init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:436    .text.MX_SPI1_Init:00000000 MX_SPI1_Init
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:499    .text.MX_SPI1_Init:00000034 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1800   .bss.hspi1:00000000 hspi1
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:505    .text.MX_USB_OTG_FS_PCD_Init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:510    .text.MX_USB_OTG_FS_PCD_Init:00000000 MX_USB_OTG_FS_PCD_Init
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:569    .text.MX_USB_OTG_FS_PCD_Init:0000002c $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1758   .bss.hpcd_USB_OTG_FS:00000000 hpcd_USB_OTG_FS
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:574    .text.MX_UART5_Init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:579    .text.MX_UART5_Init:00000000 MX_UART5_Init
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:628    .text.MX_UART5_Init:00000024 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1793   .bss.huart5:00000000 huart5
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:634    .text.MX_UART8_Init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:639    .text.MX_UART8_Init:00000000 MX_UART8_Init
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:688    .text.MX_UART8_Init:00000024 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1786   .bss.huart8:00000000 huart8
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:694    .text.SystemClock_Config:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:700    .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:834    .text.SystemClock_Config:00000090 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:840    .rodata.main.str1.4:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:847    .text.main:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:853    .text.main:00000000 main
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1316   .text.main:00000248 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1323   .text.main:00000264 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1383   .text.main:000002e0 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1696   .data.button:00000000 button
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1684   .data.enc:00000000 enc
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1718   .bss.dev_num:00000000 dev_num
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1743   .data.tx_buff:00000000 tx_buff
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1724   .bss.state:00000000 state
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1712   .bss.dev_state_lst:00000000 dev_state_lst
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1730   .bss.device_type:00000000 device_type
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1736   .bss.palette:00000000 palette
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1705   .bss.screen_scroll_mode:00000000 screen_scroll_mode
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1750   .data.val:00000000 val
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1411   .text.main:00000344 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1498   .text.main:000003a4 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1506   .rodata.HAL_UART_RxCpltCallback.str1.4:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1511   .text.HAL_UART_RxCpltCallback:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1517   .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1644   .text.HAL_UART_RxCpltCallback:00000090 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1661   .text.Error_Handler:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1667   .text.Error_Handler:00000000 Error_Handler
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1681   .data.enc:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1693   .data.button:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1706   .bss.screen_scroll_mode:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1709   .bss.dev_state_lst:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1719   .bss.dev_num:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1725   .bss.state:00000000 $d
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s 			page 52
 
 
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1731   .bss.device_type:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1737   .bss.palette:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1740   .data.tx_buff:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1747   .data.val:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1755   .bss.hpcd_USB_OTG_FS:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1765   .bss.hdma_uart8_rx:00000000 hdma_uart8_rx
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1762   .bss.hdma_uart8_rx:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1772   .bss.hdma_uart5_tx:00000000 hdma_uart5_tx
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1769   .bss.hdma_uart5_tx:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1779   .bss.hdma_uart5_rx:00000000 hdma_uart5_rx
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1776   .bss.hdma_uart5_rx:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1783   .bss.huart8:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1790   .bss.huart5:00000000 $d
-C:\Users\kroko\AppData\Local\Temp\ccR8ZrED.s:1797   .bss.hspi1:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1731   .bss.device_type:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1737   .bss.palette:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1740   .data.tx_buff:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1747   .data.val:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1755   .bss.hpcd_USB_OTG_FS:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1765   .bss.hdma_uart8_rx:00000000 hdma_uart8_rx
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1762   .bss.hdma_uart8_rx:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1772   .bss.hdma_uart5_tx:00000000 hdma_uart5_tx
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1769   .bss.hdma_uart5_tx:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1779   .bss.hdma_uart5_rx:00000000 hdma_uart5_rx
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1776   .bss.hdma_uart5_rx:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1783   .bss.huart8:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1790   .bss.huart5:00000000 $d
+C:\Users\kroko\AppData\Local\Temp\ccmtfKbd.s:1797   .bss.hspi1:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

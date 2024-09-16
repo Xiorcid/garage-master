@@ -231,11 +231,11 @@ int main(void)
       break;
 
     case STATE_DISP_1:
-      Dispaly_Data(25.8, 28.5, 1, 0, 400, '%', TEMP_PALETTE, device_type, MODE_NORMAL);
+      Dispaly_Data(25.8, 28.5, 1, 0, 400, '*', TEMP_PALETTE, device_type, MODE_NORMAL);
       break;
 
     case STATE_DISP_4:
-      Dispaly_Data(25.8, testVal, 0, 0, 400, '%', TEMP_PALETTE, TYPE_SET_TEL, testMode);
+      Dispaly_Data(25.8, testVal, 0, 0, 400, '9', TEMP_PALETTE, TYPE_SET_TEL, testMode);
       break;
 
     case STATE_EDIT:
@@ -269,7 +269,6 @@ int main(void)
 
     tick(&button);
     tickEnc(&enc);
-    //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, isHold(&button));
 
     if(isClicked(&button)){
       screen_disp_time = HAL_GetTick();
@@ -291,10 +290,10 @@ int main(void)
     }
 
     if(isLeft(&enc)){
-      if(state > STATE_INIT){
+      if(state > STATE_INIT+1){
         state--;
       }else{
-        state = DEV_COUNT-1;
+        state = DEV_COUNT;
       }
       screen_disp_time = HAL_GetTick();
     }

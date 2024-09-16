@@ -9,9 +9,9 @@ void tickEnc(Encoder *enc){
     bool s1State = HAL_GPIO_ReadPin(enc->s1_port, enc->s1_pin);
     if(s1State != enc -> s1LastState){
         if(HAL_GPIO_ReadPin(enc->s2_port, enc->s2_pin) != s1State){
-            enc->isLeftTurn = true;
-        }else{
             enc->isRightTurn = true;
+        }else{
+            enc->isLeftTurn = true;
         }
     }
 }
