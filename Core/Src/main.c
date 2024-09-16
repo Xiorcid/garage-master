@@ -298,6 +298,7 @@ int main(void)
       }
       screen_disp_time = HAL_GetTick();
     }
+    // HELLO, GIT!
 
     if(isHold(&button) && HAL_GetTick() - hold_timeout > 750){
       // screen_disp_time = HAL_GetTick();
