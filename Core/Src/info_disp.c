@@ -21,6 +21,7 @@ static uint8_t PaletteReady = 0;
 static uint8_t OldPalette;
 static sRGB888 Palette[PALETTE_SIZE];
 static uint32_t edit_tmr;
+static bool diplayFlag;
 
 static void GetBlueRedPalette(uint16_t steps, sRGB888 *pBuff, uint8_t type) {
 	if (!pBuff)
@@ -101,8 +102,17 @@ void Dispaly_Data(double data, double set, bool isOn, double minV, double maxV, 
 	if (deviceType != TYPE_TEL_ONLY){
 		gcvt(set, 3, b);
 		sprintf(buf, "%s %c", b, symbol);
-		if (deviceType == TYPE_SET_ONLY){dispcolor_DrawString(85, 205, FONTID_32F, buf, textColor);}else{
-		dispcolor_DrawString(90, 205, FONTID_24F, buf, textColor);}
+		if(displayMode == MODE_NORMAL){
+			if (deviceType == TYPE_SET_ONLY){dispcolor_DrawString(85, 205, FONTID_32F, buf, textColor);}else{
+			dispcolor_DrawString(90, 205, FONTID_24F, buf, textColor);}
+		}else{
+			if(HAL_GetTick() - edit_tmr > 500 && HAL_GetTick() - edit_tmr < 1000){
+				if (deviceType == TYPE_SET_ONLY){dispcolor_DrawString(85, 205, FONTID_32F, buf, textColor);}else{
+				dispcolor_DrawString(90, 205, FONTID_24F, buf, textColor);}
+				
+			}
+			if (HAL_GetTick() - edit_tmr > 1000){edit_tmr = HAL_GetTick();}	
+		}
 	}
 
 	uint8_t mainRadius = 101;

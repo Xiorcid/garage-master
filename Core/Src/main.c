@@ -279,23 +279,31 @@ int main(void)
         screen_scroll_mode = SCROLL_MODE_AUTO;
       }
     }
-
-    if(isRight(&enc)){
-      if(state < DEV_COUNT){
-        state++;
-      }else{
-        state = STATE_DISP_0;
+    if (testMode == MODE_NORMAL){
+      if(isRight(&enc)){
+        if(state < DEV_COUNT){
+          state++;
+        }else{
+          state = STATE_DISP_0;
+        }
+        screen_disp_time = HAL_GetTick();
       }
-      screen_disp_time = HAL_GetTick();
-    }
 
-    if(isLeft(&enc)){
-      if(state > STATE_INIT+1){
-        state--;
-      }else{
-        state = DEV_COUNT;
+      if(isLeft(&enc)){
+        if(state > STATE_INIT+1){
+          state--;
+        }else{
+          state = DEV_COUNT;
+        }
+        screen_disp_time = HAL_GetTick();
       }
-      screen_disp_time = HAL_GetTick();
+    }else{
+      if(isRight(&enc)){
+        testVal+=10;
+      }
+      if(isLeft(&enc)){
+        testVal-=10;
+      }
     }
     // HELLO, GIT!
 
