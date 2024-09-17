@@ -13,7 +13,7 @@
         "STM32F413xx",
         "USE_HAL_DRIVER"
       ],
-      "compilerPath": "/Users/kroko/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/13.3.1-1.1.1/.content/bin/arm-none-eabi-gcc"
+      "compilerPath": "C:\\USERS\\KROKO\\APPDATA\\ROAMING\\CODE\\USER\\GLOBALSTORAGE\\BMD.STM32-FOR-VSCODE\\@XPACK-DEV-TOOLS\\ARM-NONE-EABI-GCC\\13.3.1-1.1.1\\.CONTENT\\BIN\\ARM-NONE-EABI-GCC.EXE"
     }
   ],
   "version": 4

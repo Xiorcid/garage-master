@@ -192,7 +192,9 @@ int main(void)
   bool testMode = MODE_NORMAL;
   uint16_t testVal = 28.5;
 
-  deviceList[0].tx_buff[0] = "T";
+  deviceList[0].tx_buff[0] = (int)"T";
+
+  //Show_Message("HELLO, WORLD!", 5000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -208,8 +210,8 @@ int main(void)
       switch (dev_num)
       {
       case 0:
-        HAL_UART_Transmit_DMA(DEV0_UART, tx_buff, 10);
-        HAL_UART_Receive_DMA(DEV0_UART, rx_buff, 5);
+        HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
+        HAL_UART_Receive_DMA(deviceList[dev_num].uart, rx_buff, 5);
         break;
 
       case 1:
@@ -246,8 +248,8 @@ int main(void)
     
     case STATE_DISP_0:
       dev_num = 0;
-      Dispaly_Data(val, 28.5, isOn, 0, 400, '%', palette, device_type, MODE_NORMAL);
-      HAL_UART_Transmit_DMA(DEV0_UART, tx_buff, 10);
+      Dispaly_Data(deviceList[dev_num].currentValue, 28.5, isOn, 0, 400, '%', deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, MODE_NORMAL);
+      HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
       break;
 
     case STATE_DISP_1:
@@ -727,10 +729,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   // NEW CODE END
 
   // LEGACY CODE START
-  if (rx_buff[0] == "L"){
+  if (rx_buff[0] == (int)"L"){
    deviceList[dev_num].paletteType = LIGHT_PALETTE;
    deviceList[dev_num].deviceMode = TYPE_TEL_ONLY;
-   deviceList[dev_num].tx_buff[0] = "G";
+   deviceList[dev_num].tx_buff[0] = (int)"G";
   }else{
     deviceList[dev_num].currentValue = atof(rx_buff);
     deviceList[dev_num].currentValue /= 10;

@@ -96,23 +96,22 @@ void Dispaly_Data(double data, double set, bool isOn, double minV, double maxV, 
 	if (deviceType != TYPE_SET_ONLY){
 		gcvt(data, 3, b);
 		sprintf(buf, "%s %c", b, symbol);
-		dispcolor_DrawString(85, 160, FONTID_32F, buf, textColor);
-	}
-
-	if (deviceType != TYPE_TEL_ONLY){
-		gcvt(set, 3, b);
-		sprintf(buf, "%s %c", b, symbol);
+		
 		if(displayMode == MODE_NORMAL){
-			if (deviceType == TYPE_SET_ONLY){dispcolor_DrawString(85, 205, FONTID_32F, buf, textColor);}else{
-			dispcolor_DrawString(90, 205, FONTID_24F, buf, textColor);}
+			dispcolor_DrawString(85, 160, FONTID_32F, buf, textColor);		
 		}else{
 			if(HAL_GetTick() - edit_tmr > 500 && HAL_GetTick() - edit_tmr < 1000){
-				if (deviceType == TYPE_SET_ONLY){dispcolor_DrawString(85, 205, FONTID_32F, buf, textColor);}else{
-				dispcolor_DrawString(90, 205, FONTID_24F, buf, textColor);}
-				
+				dispcolor_DrawString(85, 160, FONTID_32F, buf, textColor);		
 			}
 			if (HAL_GetTick() - edit_tmr > 1000){edit_tmr = HAL_GetTick();}	
 		}
+	}
+
+	if (deviceType != TYPE_TEL_ONLY && displayMode == MODE_NORMAL){
+		gcvt(set, 3, b);
+		sprintf(buf, "%s %c", b, symbol);
+		if (deviceType == TYPE_SET_ONLY){dispcolor_DrawString(85, 205, FONTID_32F, buf, textColor);}else{
+		dispcolor_DrawString(90, 205, FONTID_24F, buf, textColor);}		
 	}
 
 	uint8_t mainRadius = 101;
@@ -165,20 +164,23 @@ void SIM_Init(char *cmd, char *ack){
 
 void Show_Message(char *msg, uint16_t time){
 	uint32_t tmr = HAL_GetTick();
+	uint16_t max_angle_local = 44;
+	int16_t min_angle_local = -244;
 	while(HAL_GetTick() - tmr < time){
 		HAL_Delay(30);
 		dispcolor_FillScreen(BLACK);
-		dispcolor_DrawString(85, 105, FONTID_16F, msg, WHITE);
+		dispcolor_DrawString(120-(sizeof(msg)*16), 120, FONTID_16F, msg, WHITE);
 		
-		int16_t position = (HAL_GetTick() - tmr) * (MAX_ANGLE - MIN_ANGLE) / time + MIN_ANGLE;
+		int16_t position = (time - (HAL_GetTick() - tmr)) * (max_angle_local - min_angle_local) / time + min_angle_local;
 
-		uint8_t mainRadius = 25;
+		uint8_t mainRadius = 111;
 		uint16_t idx = 0;
-		for (int16_t angle = MIN_ANGLE; angle < position; idx++, angle += 4) {
+		for (int16_t angle = min_angle_local; angle < position; idx++, angle += 4) {
 			float angleRad = (float) angle * PI / 180;
 			int xMain = cos(angleRad) * mainRadius + xC;
 			int yMain = sin(angleRad) * mainRadius + yC;
-			dispcolor_FillCircle(xMain, yMain, 20, YELLOW);
+			dispcolor_FillCircle(xMain, yMain, 10, YELLOW);
 		}
+		dispcolor_Update();
 	}
 }
