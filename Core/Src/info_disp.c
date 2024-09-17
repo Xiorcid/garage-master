@@ -126,12 +126,8 @@ void Dispaly_Data(double data, double set, bool isOn, double minV, double maxV, 
 	}
 
 	if (!isOn){
-		// dispcolor_DrawString(85, 145, FONTID_16F, "HEAT OFF",
-		// 		RGB565(100, 100, 100));
 		Draw_BMP(78, 78, bitmap_off_84x84, 84, 84, 1);
 	} else {
-		// dispcolor_FillRectangle(83, 144, 160, 162, GREEN);
-		// dispcolor_DrawString(85, 145, FONTID_16F, "HEAT ON", BLACK);
 		Draw_BMP(78, 78, bitmap_on_84x84, 84, 84, 1);
 	}
 
@@ -165,4 +161,24 @@ void SIM_Init(char *cmd, char *ack){
 	sprintf(buf, "%s: %s", cmd, ack);
 	dispcolor_DrawString(80, 175, FONTID_16F, buf, WHITE);
 	dispcolor_Update();
+}
+
+void Show_Message(char *msg, uint16_t time){
+	uint32_t tmr = HAL_GetTick();
+	while(HAL_GetTick() - tmr < time){
+		HAL_Delay(30);
+		dispcolor_FillScreen(BLACK);
+		dispcolor_DrawString(85, 105, FONTID_16F, msg, WHITE);
+		
+		int16_t position = (HAL_GetTick() - tmr) * (MAX_ANGLE - MIN_ANGLE) / time + MIN_ANGLE;
+
+		uint8_t mainRadius = 25;
+		uint16_t idx = 0;
+		for (int16_t angle = MIN_ANGLE; angle < position; idx++, angle += 4) {
+			float angleRad = (float) angle * PI / 180;
+			int xMain = cos(angleRad) * mainRadius + xC;
+			int yMain = sin(angleRad) * mainRadius + yC;
+			dispcolor_FillCircle(xMain, yMain, 20, YELLOW);
+		}
+	}
 }
