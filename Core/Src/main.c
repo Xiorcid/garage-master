@@ -47,14 +47,8 @@ typedef struct _Device{
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DEV_COUNT 5
-
 #define STATE_INIT    0
-#define STATE_DISP_0  1
-#define STATE_DISP_1  2
-#define STATE_DISP_2  3
-#define STATE_DISP_4  5
-#define STATE_EDIT    DEV_COUNT+1
+#define STATE_DISPLAY 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -105,7 +99,6 @@ uint8_t device_type = TYPE_SET_TEL;
 
 uint8_t state = STATE_INIT;
 uint8_t dev_num = 0;
-uint8_t dev_state_lst[DEV_COUNT];
 
 uint8_t screen_scroll_mode = SCROLL_MODE_AUTO;
 
@@ -119,6 +112,8 @@ Encoder enc = {GPIOD, GPIO_PIN_0, GPIOD, GPIO_PIN_1};
 // Device device_4 = {&huart5, DEV_STATE_UNIN, TYPE_SET_ONLY};
 
 Device deviceList[] = {{&huart5, DEV_STATE_UNIN, TYPE_SET_ONLY}};
+
+#define DEV_COUNT sizeof(deviceList)/sizeof(deviceList[0])
 /* USER CODE END 0 */
 
 /**
@@ -201,78 +196,21 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    switch (state)
-    {
-    case STATE_INIT:
-      if(dev_num != 5){
-        Display_Init(dev_num, DEV_COUNT);
-      }
-      switch (dev_num)
-      {
-      case 0:
-        HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
-        HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
-        HAL_Delay(10);
-        break;
-
-      case 1:
-        break;
-
-      case 2:
-        break;
-
-      case 3:
-        break;
-        
-      case 4:
-        break;
-
-      case 5:
-        dev_num++;
-        char at_buf = {65, 84, 13, 10};
-
-        SIM_Init("AT", "NO");
-        if(HAL_GetTick()- simtmr>50){
-          HAL_UART_Transmit_IT(&huart8, at_buf, 4);
-          simtmr = HAL_GetTick();
-        }
-        break;
-      
-      default:
-        dev_num = 6;
-        state = STATE_DISP_0;
-        dev_state_lst[1] = 1;
-        dev_state_lst[4] = 1;
-        break;
-      }
-      break;
-    
-    case STATE_DISP_0:
-      dev_num = 0;
-      Dispaly_Data(deviceList[dev_num].currentValue, 28.5, isOn, 0, 400, '%', deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, MODE_NORMAL);
-      HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
-      break;
-
-    case STATE_DISP_1:
-      Dispaly_Data(25.8, 28.5, 1, 0, 400, '*', TEMP_PALETTE, device_type, MODE_NORMAL);
-      break;
-
-    case STATE_DISP_4:
-      Dispaly_Data(25.8, testVal, 0, 0, 400, '9', TEMP_PALETTE, TYPE_SET_TEL, testMode);
-      break;
-
-    case STATE_EDIT:
-      Dispaly_Data(25.8, 28.5, 0, 0, 400, '%', TEMP_PALETTE, TYPE_SET_TEL, MODE_NORMAL);
-      break;
-    }
     // NEW CODE START
     // Dispaly_Data(deviceList[dev_num].currentValue, deviceList[dev_num].setValue, deviceList[dev_num].isDevOn, 0, 400, '%', deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, deviceList[dev_num].deviceDisplayMode);
-    
+    if(state == STATE_INIT){
+      Display_Init(dev_num, DEV_COUNT);
+      HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
+      HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
+    }else{
+      Dispaly_Data(deviceList[dev_num].currentValue, deviceList[dev_num].setValue, deviceList[dev_num].isDevOn, 0, 400, '%', deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, deviceList[dev_num].deviceDisplayMode);
+      HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
+    }
     // NEW CODE END
 
     // DEVICE INITIALIZATION START
     if (HAL_GetTick()-dev_init_timeout>50 && state == STATE_INIT){
-      if(dev_num == old_dev_num && dev_num != 5){
+      if(dev_num == old_dev_num){
         dev_num++;
       }else{
         old_dev_num = dev_num;
@@ -280,21 +218,26 @@ int main(void)
       dev_init_timeout = HAL_GetTick();
       screen_disp_time = HAL_GetTick();
     }
+
+    if(dev_num == DEV_COUNT && state == STATE_INIT){
+      state = STATE_DISPLAY;
+      dev_num = 0;
+    }
     // DEVICE INITIALIZATION END
 
     // AUTO SCREEN SCROLL START
-    if (HAL_GetTick()-screen_disp_time>5000 && screen_scroll_mode == SCROLL_MODE_AUTO){
-      if(state != STATE_INIT){
-        do{
-          if(state < DEV_COUNT){
-            state++;
-          }else{
-            state = STATE_DISP_0;
-          }
-        }while (!dev_state_lst[state-1]);  
-      }
-      screen_disp_time = HAL_GetTick();
-    }
+    // if (HAL_GetTick()-screen_disp_time>5000 && screen_scroll_mode == SCROLL_MODE_AUTO){
+    //   if(state != STATE_INIT){
+    //     do{
+    //       if(state < DEV_COUNT){
+    //         state++;
+    //       }else{
+    //         state = STATE_DISP_0;
+    //       }
+    //     }while (!dev_state_lst[state-1]);  
+    //   }
+    //   screen_disp_time = HAL_GetTick();
+    // }
     // AUTO SCREEN SCROLL END
 
     // GPIO READING START
@@ -303,15 +246,15 @@ int main(void)
     // GPIO READING END
 
     // SCROLL MODE CHANGE START
-    if(isClicked(&button)){
-      screen_disp_time = HAL_GetTick();
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-      if(screen_scroll_mode == SCROLL_MODE_AUTO){
-        screen_scroll_mode = SCROLL_MODE_HALT;
-      }else{
-        screen_scroll_mode = SCROLL_MODE_AUTO;
-      }
-    }
+    // if(isClicked(&button)){
+    //   screen_disp_time = HAL_GetTick();
+    //   HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+    //   if(screen_scroll_mode == SCROLL_MODE_AUTO){
+    //     screen_scroll_mode = SCROLL_MODE_HALT;
+    //   }else{
+    //     screen_scroll_mode = SCROLL_MODE_AUTO;
+    //   }
+    // }
     // SCROLL MODE CHANGE END
 
     // ENCODER START
@@ -319,23 +262,23 @@ int main(void)
     if (testMode == MODE_NORMAL){
     // TEST CODE
       // MANUAL SCREEN SROLL START
-      if(isRight(&enc)){
-        if(state < DEV_COUNT){
-          state++;
-        }else{
-          state = STATE_DISP_0;
-        }
-        screen_disp_time = HAL_GetTick();
-      }
+      // if(isRight(&enc)){
+      //   if(state < DEV_COUNT){
+      //     state++;
+      //   }else{
+      //     state = STATE_DISP_0;
+      //   }
+      //   screen_disp_time = HAL_GetTick();
+      // }
 
-      if(isLeft(&enc)){
-        if(state > STATE_INIT+1){
-          state--;
-        }else{
-          state = DEV_COUNT;
-        }
-        screen_disp_time = HAL_GetTick();
-      }
+      // if(isLeft(&enc)){
+      //   if(state > STATE_INIT+1){
+      //     state--;
+      //   }else{
+      //     state = DEV_COUNT;
+      //   }
+      //   screen_disp_time = HAL_GetTick();
+      // }
       // MANUAL SCREEN SCROLL START
     }else{
       // VALUE EDIT START
@@ -355,9 +298,9 @@ int main(void)
       hold_timeout = HAL_GetTick();
 
       // TEST CODE START
-      if (state == STATE_DISP_4){
-        testMode = !testMode;
-      }
+      // if (state == STATE_DISP_4){
+      //   testMode = !testMode;
+      // }
       // TEST CODE END
 
       if(screen_scroll_mode == SCROLL_MODE_AUTO){
@@ -678,6 +621,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   val    -> OK
   ON     -> OK
   OFF    -> OK
+  MX     -> value
+  MI     -> value
   */
 
   HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
@@ -709,7 +654,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   // NEW CODE END
 
   if(state == STATE_INIT){
-    dev_state_lst[0] = DEV_STATE_IN;
     deviceList[dev_num].initState = DEV_STATE_IN;
     dev_num++;
   }
