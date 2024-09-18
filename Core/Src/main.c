@@ -118,7 +118,7 @@ Encoder enc = {GPIOD, GPIO_PIN_0, GPIOD, GPIO_PIN_1};
 // Device device_3 = {&huart5, DEV_STATE_UNIN, TYPE_SET_ONLY};
 // Device device_4 = {&huart5, DEV_STATE_UNIN, TYPE_SET_ONLY};
 
-Device deviceList[] = {{&huart5, DEV_STATE_UNIN, TYPE_SET_ONLY}, {&huart8, DEV_STATE_UNIN, TYPE_SET_ONLY}};
+Device deviceList[] = {{&huart5, DEV_STATE_UNIN, TYPE_SET_ONLY}};
 /* USER CODE END 0 */
 
 /**
@@ -192,7 +192,7 @@ int main(void)
   bool testMode = MODE_NORMAL;
   uint16_t testVal = 28.5;
 
-  deviceList[0].tx_buff[0] = (int)"T";
+  deviceList[0].tx_buff[0] = 84;
 
   //Show_Message("HELLO, WORLD!", 5000);
   /* USER CODE END 2 */
@@ -211,7 +211,8 @@ int main(void)
       {
       case 0:
         HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
-        HAL_UART_Receive_DMA(deviceList[dev_num].uart, rx_buff, 5);
+        HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
+        HAL_Delay(10);
         break;
 
       case 1:
@@ -673,14 +674,39 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   COMMUNICATION PROTOCOL
   Master    Slave
   T      -> palette(L/T), type(S/T/B) ... LB
-  G      -> A(value) ... 754
-  S(val) -> OK
+  G      -> value ... 754
+  val    -> OK
   ON     -> OK
   OFF    -> OK
   */
-  char rx_buff[5];
 
-  HAL_UART_Receive_DMA(deviceList[dev_num].uart, rx_buff, 5);
+  HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
+
+    // NEW CODE START
+  if(deviceList[dev_num].rx_buff[0] == 76 || deviceList[dev_num].rx_buff[0] == 84){
+    if (deviceList[dev_num].rx_buff[0] == 76){
+      deviceList[dev_num].paletteType = LIGHT_PALETTE;
+    }else{
+      deviceList[dev_num].paletteType = TEMP_PALETTE;
+    }
+    switch (deviceList[dev_num].rx_buff[1])
+    {
+    case 83:
+      deviceList[dev_num].deviceMode = TYPE_SET_ONLY;
+      break;
+    case 84:
+      deviceList[dev_num].deviceMode = TYPE_TEL_ONLY;
+      break;
+    case 66:
+      deviceList[dev_num].deviceMode = TYPE_SET_TEL;
+      break;
+    }
+    deviceList[dev_num].tx_buff[0] = 71;
+  }else{
+    deviceList[dev_num].currentValue = atof(deviceList[dev_num].rx_buff);
+    deviceList[dev_num].currentValue /= 10;
+  }
+  // NEW CODE END
 
   if(state == STATE_INIT){
     dev_state_lst[0] = DEV_STATE_IN;
@@ -689,76 +715,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   }
 
   HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
- 
-  // NEW CODE START
-  /*
-  switch (rx_buff[0])
-  {
-  case 'L'|'T':
-    if (rx_buff[0] = 'L'){
-      deviceList[dev_num].paletteType = LIGHT_PALETTE;
-    }else{
-      deviceList[dev_num].paletteType = TEMP_PALETTE;
-    }
-    switch (rx_buff[1])
-    {
-    case 'S':
-      deviceList[dev_num].deviceMode = TYPE_SET_ONLY;
-      break;
-    case 'T':
-      deviceList[dev_num].deviceMode = TYPE_TEL_ONLY;
-      break;
-    case 'B':
-      deviceList[dev_num].deviceMode = TYPE_SET_TEL;
-      break;
-    }
-    break;
-  case 'A':
-    rx_buff[0] = 0;
-    deviceList[dev_num].currentValue = atof(rx_buff);
-    deviceList[dev_num].currentValue /= 10;
-    break;
-
-  default:
-    Show_Message("Communication error!",5);
-    break;
-  }
-
-  deviceList[dev_num].tx_buff[0] = "G";
-  */
-  // NEW CODE END
-
-  // LEGACY CODE START
-  if (rx_buff[0] == (int)"L"){
-   deviceList[dev_num].paletteType = LIGHT_PALETTE;
-   deviceList[dev_num].deviceMode = TYPE_TEL_ONLY;
-   deviceList[dev_num].tx_buff[0] = (int)"G";
-  }else{
-    deviceList[dev_num].currentValue = atof(rx_buff);
-    deviceList[dev_num].currentValue /= 10;
-  }
-  // LEGACY CODE END
-
-  // switch (dev_num)
-  // {
-  // case 0:
-  //   HAL_UART_Receive_DMA(deviceList[0].uart, rx_buff, 5);
-  //   if(state == STATE_INIT){
-  //     dev_state_lst[0] = DEV_STATE_IN;
-  //     deviceList[0].initState = DEV_STATE_IN;
-  //     dev_num++;
-  //   }
-  //   break;
-  
-  // case 5:
-  //   HAL_UART_Receive_DMA(&huart8, rx_buff, 5);
-  //   SIM_Init("AT", "OK");
-  //   dev_num++;
-  //   break;
-  
-  // default:
-  //   break;
-  // }
 }
 /* USER CODE END 4 */
 
