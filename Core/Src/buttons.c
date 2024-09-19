@@ -1,7 +1,7 @@
 #include "buttons.h"
 
 void init(Button *btt){
-    gpio_SetGPIOmode_In(btt->port, btt->pin, btt->type);
+    gpio_SetGPIOmode_In(btt->port, btt->pin, 0);
     btt->btn_flag = true;
 }
 

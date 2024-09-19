@@ -226,18 +226,18 @@ int main(void)
     // DEVICE INITIALIZATION END
 
     // AUTO SCREEN SCROLL START
-    // if (HAL_GetTick()-screen_disp_time>5000 && screen_scroll_mode == SCROLL_MODE_AUTO){
-    //   if(state != STATE_INIT){
-    //     do{
-    //       if(state < DEV_COUNT){
-    //         state++;
-    //       }else{
-    //         state = STATE_DISP_0;
-    //       }
-    //     }while (!dev_state_lst[state-1]);  
-    //   }
-    //   screen_disp_time = HAL_GetTick();
-    // }
+    if (HAL_GetTick()-screen_disp_time>5000 && screen_scroll_mode == SCROLL_MODE_AUTO){
+      if(state != STATE_INIT){
+        do{
+          if(dev_num < DEV_COUNT-1){
+            dev_num++;
+          }else{
+            dev_num=0;
+          }
+        }while (!deviceList[dev_num].initState);  
+      }
+      screen_disp_time = HAL_GetTick();
+    }
     // AUTO SCREEN SCROLL END
 
     // GPIO READING START
@@ -246,47 +246,47 @@ int main(void)
     // GPIO READING END
 
     // SCROLL MODE CHANGE START
-    // if(isClicked(&button)){
-    //   screen_disp_time = HAL_GetTick();
-    //   HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-    //   if(screen_scroll_mode == SCROLL_MODE_AUTO){
-    //     screen_scroll_mode = SCROLL_MODE_HALT;
-    //   }else{
-    //     screen_scroll_mode = SCROLL_MODE_AUTO;
-    //   }
-    // }
+    if(isClicked(&button)){
+      screen_disp_time = HAL_GetTick();
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+      if(screen_scroll_mode == SCROLL_MODE_AUTO){
+        screen_scroll_mode = SCROLL_MODE_HALT;
+      }else{
+        screen_scroll_mode = SCROLL_MODE_AUTO;
+      }
+    }
     // SCROLL MODE CHANGE END
 
     // ENCODER START
     // TEST CODE START
-    if (testMode == MODE_NORMAL){
+    if (deviceList[dev_num].deviceDisplayMode == MODE_NORMAL){
     // TEST CODE
       // MANUAL SCREEN SROLL START
-      // if(isRight(&enc)){
-      //   if(state < DEV_COUNT){
-      //     state++;
-      //   }else{
-      //     state = STATE_DISP_0;
-      //   }
-      //   screen_disp_time = HAL_GetTick();
-      // }
+      if(isRight(&enc)){
+        if(dev_num < DEV_COUNT){
+          dev_num++;
+        }else{
+          dev_num = 0;
+        }
+        screen_disp_time = HAL_GetTick();
+      }
 
-      // if(isLeft(&enc)){
-      //   if(state > STATE_INIT+1){
-      //     state--;
-      //   }else{
-      //     state = DEV_COUNT;
-      //   }
-      //   screen_disp_time = HAL_GetTick();
-      // }
+      if(isLeft(&enc)){
+        if(dev_num > 0){
+          dev_num--;
+        }else{
+          dev_num = DEV_COUNT;
+        }
+        screen_disp_time = HAL_GetTick();
+      }
       // MANUAL SCREEN SCROLL START
     }else{
       // VALUE EDIT START
       if(isRight(&enc)){
-        testVal+=10;
+        deviceList[dev_num].setValue +=10;
       }
       if(isLeft(&enc)){
-        testVal-=10;
+        deviceList[dev_num].setValue -=10;
       }
       // VALUE EDIT END
     }
@@ -294,14 +294,14 @@ int main(void)
 
     // EDIT VALUE START
     if(isHold(&button) && HAL_GetTick() - hold_timeout > 750){
-      // screen_disp_time = HAL_GetTick();
+      screen_disp_time = HAL_GetTick();
       hold_timeout = HAL_GetTick();
-
-      // TEST CODE START
-      // if (state == STATE_DISP_4){
-      //   testMode = !testMode;
-      // }
-      // TEST CODE END
+      if(deviceList[dev_num].deviceDisplayMode == MODE_NORMAL){
+        deviceList[dev_num].setValue = deviceList[dev_num].currentValue;
+        deviceList[dev_num].deviceDisplayMode = MODE_EDIT;
+      }else{
+        deviceList[dev_num].deviceDisplayMode = MODE_NORMAL;
+      }
 
       if(screen_scroll_mode == SCROLL_MODE_AUTO){
         screen_scroll_mode = SCROLL_MODE_HALT;

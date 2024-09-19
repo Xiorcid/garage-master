@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -42,9 +42,9 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
   37              		.cfi_offset 4, -8
   38              		.cfi_offset 14, -4
   39 0002 0446     		mov	r4, r0
-   4:Core/Src/buttons.c ****     gpio_SetGPIOmode_In(btt->port, btt->pin, btt->type);
+   4:Core/Src/buttons.c ****     gpio_SetGPIOmode_In(btt->port, btt->pin, 0);
   40              		.loc 1 4 5 is_stmt 1 view .LVU2
-  41 0004 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
+  41 0004 0022     		movs	r2, #0
   42 0006 8188     		ldrh	r1, [r0, #4]
   43 0008 0068     		ldr	r0, [r0]
   44              	.LVL1:
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
   51 0010 2374     		strb	r3, [r4, #16]
    6:Core/Src/buttons.c **** }
   52              		.loc 1 6 1 view .LVU6
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 2
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 2
 
 
   53 0012 10BD     		pop	{r4, pc}
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
   14:Core/Src/buttons.c ****         btt->btn_hold = false;
   15:Core/Src/buttons.c ****         btt->btn_timer = HAL_GetTick();
   16:Core/Src/buttons.c ****     }
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 3
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 3
 
 
   17:Core/Src/buttons.c ****     if (btn_state && btt->btn_flag && HAL_GetTick() - btt->btn_timer > 100) {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
  137 0036 0123     		movs	r3, #1
  138 0038 2374     		strb	r3, [r4, #16]
   13:Core/Src/buttons.c ****         btt->btn_hold = false;
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 4
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 4
 
 
  139              		.loc 1 13 9 is_stmt 1 view .LVU34
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
  176              		.loc 1 19 26 is_stmt 0 view .LVU51
  177 005e FFF7FEFF 		bl	HAL_GetTick
  178              	.LVL11:
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 5
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 5
 
 
   19:Core/Src/buttons.c ****         btt->btn_hold_timer = HAL_GetTick();
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
  219              		.align	1
  220              		.global	isClicked
  221              		.syntax unified
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 6
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 6
 
 
  222              		.thumb
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
  266              		.cfi_startproc
  267              		@ args = 0, pretend = 0, frame = 0
  268              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 7
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 7
 
 
  269              		@ link register save eliminated.
@@ -383,19 +383,19 @@ ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 1
  285              		.file 6 "Core/Inc/buttons.h"
  286              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  287              		.file 8 "Core/Inc/gpio.h"
-ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccnctups.s 			page 8
+ARM GAS  C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 buttons.c
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:21     .text.init:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:27     .text.init:00000000 init
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:59     .text.tick:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:65     .text.tick:00000000 tick
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:219    .text.isClicked:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:225    .text.isClicked:00000000 isClicked
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:256    .text.isHold:00000000 $t
-C:\Users\kroko\AppData\Local\Temp\ccnctups.s:262    .text.isHold:00000000 isHold
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:21     .text.init:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:27     .text.init:00000000 init
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:59     .text.tick:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:65     .text.tick:00000000 tick
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:219    .text.isClicked:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:225    .text.isClicked:00000000 isClicked
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:256    .text.isHold:00000000 $t
+C:\Users\kroko\AppData\Local\Temp\ccVOMnq2.s:262    .text.isHold:00000000 isHold
 
 UNDEFINED SYMBOLS
 gpio_SetGPIOmode_In
