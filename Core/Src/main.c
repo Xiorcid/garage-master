@@ -303,6 +303,9 @@ int main(void)
         deviceList[dev_num].setValue = deviceList[dev_num].currentValue;
         deviceList[dev_num].deviceDisplayMode = MODE_EDIT;
       }else{
+        char setValueTx[10];
+        sprintf(setValueTx, "%d", deviceList[dev_num].setValue);
+        HAL_UART_Transmit_DMA(deviceList[dev_num].uart, setValueTx, 10);
         deviceList[dev_num].deviceDisplayMode = MODE_NORMAL;
       }
 
