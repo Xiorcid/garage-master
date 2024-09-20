@@ -607,7 +607,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   /*
   COMMUNICATION PROTOCOL
   Master    Slave
-  T      -> palette(L/T), type(S/T/B), I(value), X(value), (symbol) ... LBI0X250%
+  T      -> palette(L/T), type(S/T/B), (value), X(value), (symbol) ... LB0X250%
   G      -> value ... 754
   val    -> OK
   ON     -> OK
@@ -642,25 +642,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
     // ENDIF
 
-    uint8_t minValueStartIndex;
     uint8_t minValueEndIndex;
 
     for (int i = 2; i<sizeof(deviceList[dev_num].rx_buff); i++){
-      if(deviceList[dev_num].rx_buff[i] == 73){
-        minValueStartIndex = i+1;
-        continue;
-      }
       if(deviceList[dev_num].rx_buff[i] == 88){
         minValueEndIndex = i-1;
         break;
       }
     }
 
-    uint8_t minValueArr[minValueEndIndex-minValueStartIndex];
+    uint8_t minValueArr[minValueEndIndex-2];
     uint8_t maxValueArr[sizeof(deviceList[dev_num].rx_buff)-minValueEndIndex-1];
 
-    for (int i = minValueStartIndex; i<minValueEndIndex+1; i++){
-      minValueArr[i-minValueStartIndex] = deviceList[dev_num].rx_buff[i];
+    for (int i = 2; i<minValueEndIndex+1; i++){
+      minValueArr[i-2] = deviceList[dev_num].rx_buff[i];
     }
 
     for (int i = minValueEndIndex+2; i<sizeof(deviceList[dev_num].rx_buff)-1; i++){
