@@ -37,11 +37,14 @@ typedef struct _Device{
   uint8_t deviceMode;
   uint16_t currentValue;
   uint16_t setValue;
+  uint16_t minValue;
+  uint16_t maxValue;
   bool isDevOn;
   bool deviceDisplayMode;
   bool paletteType;
   uint8_t rx_buff[10];
   uint8_t tx_buff[10]; 
+  char symbol;
 } Device;
 /* USER CODE END PTD */
 
@@ -203,7 +206,7 @@ int main(void)
       HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
       HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
     }else{
-      Dispaly_Data(deviceList[dev_num].currentValue, deviceList[dev_num].setValue, deviceList[dev_num].isDevOn, 0, 400, '%', deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, deviceList[dev_num].deviceDisplayMode);
+      Dispaly_Data(deviceList[dev_num].currentValue, deviceList[dev_num].setValue, deviceList[dev_num].isDevOn, deviceList[dev_num].minValue, deviceList[dev_num].maxValue, deviceList[dev_num].symbol, deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, deviceList[dev_num].deviceDisplayMode);
       HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
     }
     // NEW CODE END
@@ -616,24 +619,27 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   /*
   COMMUNICATION PROTOCOL
   Master    Slave
-  T      -> palette(L/T), type(S/T/B) ... LB
+  T      -> palette(L/T), type(S/T/B), I(value), X(value), (symbol) ... LBI0X250%
   G      -> value ... 754
   val    -> OK
   ON     -> OK
   OFF    -> OK
-  MX     -> value
-  MI     -> value
   */
 
   HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
 
     // NEW CODE START
+    // IF FIRST LETTER IS L OR T
   if(deviceList[dev_num].rx_buff[0] == 76 || deviceList[dev_num].rx_buff[0] == 84){
+    // IF L
     if (deviceList[dev_num].rx_buff[0] == 76){
       deviceList[dev_num].paletteType = LIGHT_PALETTE;
     }else{
       deviceList[dev_num].paletteType = TEMP_PALETTE;
     }
+    // ENDIF
+
+    // DEVICE MODE
     switch (deviceList[dev_num].rx_buff[1])
     {
     case 83:
@@ -646,7 +652,42 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
       deviceList[dev_num].deviceMode = TYPE_SET_TEL;
       break;
     }
+    // ENDIF
+
+    uint8_t minValueStartIndex;
+    uint8_t minValueEndIndex;
+
+    for (int i = 2; i<sizeof(deviceList[dev_num].rx_buff); i++){
+      if(deviceList[dev_num].rx_buff[i] == 73){
+        minValueStartIndex = i+1;
+        continue;
+      }
+      if(deviceList[dev_num].rx_buff[i] == 88){
+        minValueEndIndex = i-1;
+        break;
+      }
+    }
+
+    uint8_t minValueArr[minValueEndIndex-minValueStartIndex];
+    uint8_t maxValueArr[sizeof(deviceList[dev_num].rx_buff)-minValueEndIndex-1];
+
+    for (int i = minValueStartIndex; i<minValueEndIndex+1; i++){
+      minValueArr[i-minValueStartIndex] = deviceList[dev_num].rx_buff[i];
+    }
+
+    for (int i = minValueEndIndex+2; i<sizeof(deviceList[dev_num].rx_buff)-1; i++){
+      minValueArr[i-minValueEndIndex] = deviceList[dev_num].rx_buff[i];
+    }
+
+    deviceList[dev_num].minValue = atof(minValueArr);
+    deviceList[dev_num].maxValue = atof(maxValueArr);
+
+    deviceList[dev_num].symbol = deviceList[dev_num].rx_buff[sizeof(deviceList[dev_num].rx_buff)];
+
+
     deviceList[dev_num].tx_buff[0] = 71;
+  }else if (deviceList[dev_num].rx_buff[0] == 79){
+    //PASS
   }else{
     deviceList[dev_num].currentValue = atof(deviceList[dev_num].rx_buff);
     deviceList[dev_num].currentValue /= 10;
@@ -670,7 +711,9 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
-
+  __disable_irq();
+  Show_Message("Kernel panic", 60000);
+  NVIC_SystemReset();
   /* USER CODE END Error_Handler_Debug */
 }
 
