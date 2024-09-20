@@ -612,6 +612,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   val    -> OK
   ON     -> OK
   OFF    -> OK
+  S      -> S(state(0/1)) ... S1
   */
 
   HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
@@ -669,8 +670,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 
     deviceList[dev_num].tx_buff[0] = 71;
-  }else if (deviceList[dev_num].rx_buff[0] == 79){
-    //PASS
+  }else if (deviceList[dev_num].rx_buff[0] == 83){
+    if(atoi(deviceList[dev_num].rx_buff[1]) == 1){
+      deviceList[dev_num].isDevOn = 1;
+    }else{
+      deviceList[dev_num].isDevOn = 0;
+    }
   }else{
     deviceList[dev_num].currentValue = atof(deviceList[dev_num].rx_buff);
     deviceList[dev_num].currentValue /= 10;
