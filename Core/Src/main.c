@@ -31,21 +31,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef struct _Device{
-  UART_HandleTypeDef* uart;
-  bool initState;
-  uint8_t deviceMode;
-  uint16_t currentValue;
-  uint16_t setValue;
-  uint16_t minValue;
-  uint16_t maxValue;
-  bool isDevOn;
-  bool deviceDisplayMode;
-  bool paletteType;
-  uint8_t rx_buff[10];
-  uint8_t tx_buff[10]; 
-  char symbol;
-} Device;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -200,13 +186,12 @@ int main(void)
   while (1)
   {
     // NEW CODE START
-    // Dispaly_Data(deviceList[dev_num].currentValue, deviceList[dev_num].setValue, deviceList[dev_num].isDevOn, 0, 400, '%', deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, deviceList[dev_num].deviceDisplayMode);
     if(state == STATE_INIT){
       Display_Init(dev_num, DEV_COUNT);
       HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
       HAL_UART_Receive_DMA(deviceList[dev_num].uart, deviceList[dev_num].rx_buff, 10);
     }else{
-      Dispaly_Data(deviceList[dev_num].currentValue, deviceList[dev_num].setValue, deviceList[dev_num].isDevOn, deviceList[dev_num].minValue, deviceList[dev_num].maxValue, deviceList[dev_num].symbol, deviceList[dev_num].paletteType, deviceList[dev_num].deviceMode, deviceList[dev_num].deviceDisplayMode);
+      Dispaly_Data(&deviceList[dev_num]);
       HAL_UART_Transmit_DMA(deviceList[dev_num].uart, deviceList[dev_num].tx_buff, 10);
     }
     // NEW CODE END

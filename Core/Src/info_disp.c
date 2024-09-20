@@ -66,12 +66,24 @@ void Draw_BMP(int16_t x, int16_t y, const uint16_t *map, int8_t w, int8_t h, boo
 	}
 }
 
-void Dispaly_Data(double data, double set, bool isOn, double minV, double maxV, char symbol, uint8_t paletteType, uint8_t deviceType, bool displayMode) {
+void Dispaly_Data(Device *dev) {
 	/* Device types
 		0 - Set value & telemetrty
 		1 - Set value only
 		2 - Telemetry only
 	*/
+	
+	// FIX THIS:
+	double data = dev->currentValue;
+	double set = dev->setValue;
+	bool isOn = dev->isDevOn;
+	double minV = dev->minValue;
+	double maxV = dev->maxValue;
+	char symbol = dev->symbol;
+	uint8_t paletteType = dev->paletteType;
+	uint8_t deviceType = dev->deviceMode;
+	bool displayMode = dev->deviceDisplayMode;
+	// END
 
 	if (!PaletteReady || paletteType != OldPalette) {
 		GetBlueRedPalette(PALETTE_SIZE, Palette, paletteType);

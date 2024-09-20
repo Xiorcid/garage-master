@@ -32,7 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdbool.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -42,7 +42,21 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+typedef struct _Device{
+  UART_HandleTypeDef* uart;
+  bool initState;
+  uint8_t deviceMode;
+  uint16_t currentValue;
+  uint16_t setValue;
+  uint16_t minValue;
+  uint16_t maxValue;
+  bool isDevOn;
+  bool deviceDisplayMode;
+  bool paletteType;
+  uint8_t rx_buff[10];
+  uint8_t tx_buff[10]; 
+  char symbol;
+} Device;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
