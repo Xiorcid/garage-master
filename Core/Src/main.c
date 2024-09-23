@@ -608,7 +608,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   COMMUNICATION PROTOCOL
   Master    Slave
   T      -> palette(L/T), type(S/T/B), (value), X(value), (symbol) ... LB0X250%
-  G      -> value ... 754
+  G      -> A(value)B ... A754B
   val    -> OK
   ON     -> OK
   OFF    -> OK
@@ -644,30 +644,32 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     // ENDIF
 
     uint8_t minValueEndIndex;
+    uint8_t maxValueEndIndex;
 
-    for (int i = 2; i<sizeof(deviceList[dev_num].rx_buff); i++){
+    for (int i = 2; i<10; i++){
       if(deviceList[dev_num].rx_buff[i] == 88){
         minValueEndIndex = i-1;
-        break;
+      }
+      if(deviceList[dev_num].rx_buff[i] == 89){
+        maxValueEndIndex = i-1;
       }
     }
 
-    uint8_t minValueArr[minValueEndIndex-2];
-    uint8_t maxValueArr[sizeof(deviceList[dev_num].rx_buff)-minValueEndIndex-1];
+    char minValueArr[minValueEndIndex-1];
+    char maxValueArr[maxValueEndIndex-minValueEndIndex-1];
 
     for (int i = 2; i<minValueEndIndex+1; i++){
       minValueArr[i-2] = deviceList[dev_num].rx_buff[i];
     }
 
-    for (int i = minValueEndIndex+2; i<sizeof(deviceList[dev_num].rx_buff)-1; i++){
-      minValueArr[i-minValueEndIndex] = deviceList[dev_num].rx_buff[i];
+    for (int i = minValueEndIndex+2; i<maxValueEndIndex+1; i++){
+      maxValueArr[i-minValueEndIndex-2] = deviceList[dev_num].rx_buff[i];
     }
 
     deviceList[dev_num].minValue = atof(minValueArr);
-    deviceList[dev_num].maxValue = atof(maxValueArr);
+    deviceList[dev_num].maxValue = atof(maxValueArr);    
 
-    deviceList[dev_num].symbol = deviceList[dev_num].rx_buff[sizeof(deviceList[dev_num].rx_buff)];
-
+    deviceList[dev_num].symbol = deviceList[dev_num].rx_buff[maxValueEndIndex+2];
 
     deviceList[dev_num].tx_buff[0] = 71;
   }else if (deviceList[dev_num].rx_buff[0] == 83){
@@ -676,10 +678,24 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }else{
       deviceList[dev_num].isDevOn = 0;
     }
-  }else{
-    deviceList[dev_num].currentValue = atof(deviceList[dev_num].rx_buff);
+  }else if (deviceList[dev_num].rx_buff[0] == 65){// ISSUE START
+    uint8_t valueEnd;
+    for (int i = 1; i<10; i++){
+      if(deviceList[dev_num].rx_buff[i] == 66){
+        valueEnd = i;
+        break;
+      }
+    }
+
+    char buf[valueEnd-1];
+
+    for (int i = 1; i<valueEnd; i++){
+      buf[i-1] = deviceList[dev_num].rx_buff[i];
+    }
+
+    deviceList[dev_num].currentValue = atof(buf);
     deviceList[dev_num].currentValue /= 10;
-  }
+  }// ISSUE END
   // NEW CODE END
 
   if(state == STATE_INIT){
