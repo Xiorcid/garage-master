@@ -57,6 +57,12 @@ typedef struct _Device{
   uint8_t tx_buff[10]; 
   char symbol;
 } Device;
+
+typedef struct _SIM{
+  UART_HandleTypeDef* uart;
+  bool initState;
+  uint8_t simPin;
+} SIM;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
